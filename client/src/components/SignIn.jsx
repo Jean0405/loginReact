@@ -9,8 +9,8 @@ function SignIn() {
 
   const Fetch = async (event) => {
     event.preventDefault();
-    let data = await GetFetch({ email, password })
-    setResponse(data)
+    let data = await GetFetch({ email, password });
+    setResponse(data);
   };
 
   return (
@@ -27,7 +27,7 @@ function SignIn() {
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 focus:outline-none border-indigo-700 border-l-4 p-2"
+          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2"
         />
         <input
           name="password"
@@ -35,10 +35,13 @@ function SignIn() {
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 focus:outline-none border-indigo-700 border-l-4 p-2"
+          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2"
         />
         <div className="grid place-items-center ">
-          <input type="submit" className="w-40 rounded-none bg-indigo-700 text-white font-bold hover:bg-indigo-200 hover:text-indigo-700  p-2" />
+          <input
+            type="submit"
+            className="w-40 rounded-none bg-indigo-700 text-white font-bold hover:bg-indigo-200 hover:text-indigo-700  p-2"
+          />
 
           <p className="mt-5 gap-x-2 text-center text-sm text-gray-500">
             Not a member?
