@@ -9,7 +9,7 @@ export const GetFetch = async (data) => {
   config.body = JSON.stringify(data);
 
   const dataObtained = await (
-    await fetch("http://127.25.25.27:3300/login", config)
+    await fetch("http://127.25.25.27:3300/auth/login", config)
   ).json();
 
   return dataObtained;

@@ -7,12 +7,10 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const [response, setResponse] = useState({});
 
-  
-  
   const Fetch = async (event) => {
     event.preventDefault();
-    let data = await GetFetch({email, password})
-    setResponse(data.results.email)
+    let data = await GetFetch({ email, password })
+    setResponse(data)
   };
 
   return (
@@ -50,7 +48,7 @@ function SignIn() {
           </p>
         </div>
       </form>
-      <div>{JSON.stringify(response)}</div>
+      <div>{JSON.stringify(response.message)}</div>
     </div>
   );
 }
