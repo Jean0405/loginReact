@@ -9,8 +9,13 @@ function SignIn() {
 
   const Fetch = async (event) => {
     event.preventDefault();
-    let data = await GetFetch({ email, password });
-    setResponse(data);
+    let result = await GetFetch({ email, password });
+
+    if(!result.data[0]){
+      alert("no existes")
+    }else{
+      setResponse(result);
+    }
   };
 
   return (
@@ -51,7 +56,7 @@ function SignIn() {
           </p>
         </div>
       </form>
-      <div>{JSON.stringify(response.message)}</div>
+      <div>{JSON.stringify(response)}</div>
     </div>
   );
 }
