@@ -1,21 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { GetFetch } from "../api/getFetch";
 
-function SignIn() {
+export const SignIn = ()=> {
+  let redirect = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [response, setResponse] = useState({});
+  const config = {
+    headers: new Headers({
+      "Content-Type": "application/json",
+    }),
+  };
 
+  //API REQUEST
   const Fetch = async (event) => {
     event.preventDefault();
-    let result = await GetFetch({ email, password });
 
-    if(!result.data[0]){
-      alert("no existes")
-    }else{
-      setResponse(result);
-    }
+    config.method = "POST";
+    config.body = JSON.stringify({email, password});
+   
+    try {
+        let result = await (
+        await fetch("http://127.25.25.27:3300/auth/login", config)
+      ).json();
+
+
+      //IF USER NOT FOUND
+      if(result.status == 200){
+        redirect("/home", {state: {username: result.data[0].username}})
+      } else{
+        alert("User not found");
+      }
+
+    } catch (error) {
+      console.log(error);
+    }     
   };
 
   return (
@@ -56,9 +74,6 @@ function SignIn() {
           </p>
         </div>
       </form>
-      <div>{JSON.stringify(response)}</div>
     </div>
   );
 }
-
-export default SignIn;
