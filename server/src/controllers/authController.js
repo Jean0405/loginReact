@@ -3,7 +3,16 @@ import * as authServices from "../services/authService.js";
 export const login = async (req, res) => {
   try {
     let data = await authServices.login(req.body);
-    res.status(200).json({ status: 200, message: "successful ", data: data });
+
+    if (!data.length) {
+      res.status(404).json({
+        status: 404,
+        message: "user not found ",
+        data: req.body.email,
+      });
+    } else {
+      res.status(200).json({ status: 200, message: "user found ", data: data });
+    }
   } catch (error) {
     res.status(500).send({
       status: 500,
