@@ -1,25 +1,21 @@
 console.clear();
 import { SERVER } from "./configurations/serverConfig.js";
+import { fileURLToPath } from "url";
+import path from "path";
 import express from "express";
 import cors from "cors";
 import V1 from "./v1/index.js";
 
 const APP = express();
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DIST_DIRECTORY = path.join(__dirname, "../../client/dist");
 //MIDDLEWARES
 APP.use(cors());
 APP.use(express.json());
 
-//ROUTES
-// APP.all("/login", async (req, res) => {
-//   const { email, passowrd } = req.body;
-//   res.status(200).json({
-//     status: 200,
-//     message: "USUARIO ENCONTRADO",
-//     results: { email, passowrd },
-//   });
-// });
-APP.use("/", V1)
+APP.use("/", V1);
+APP.use(express.static(DIST_DIRECTORY));
 
 //SERVER LISTEN
 APP.listen(SERVER.PORT, () =>
