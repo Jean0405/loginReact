@@ -3,7 +3,6 @@ db.createCollection("users");
 
 use("crud_react");
 db.users.insertOne({
-  id: 1,
   username: "Sevedol",
   email: "jean@gmail.com",
   password: "jean123",

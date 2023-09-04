@@ -23,3 +23,25 @@ export const login = async (req, res) => {
     });
   }
 };
+
+export const signUp = async (req, res) => {
+  try {
+    let data = await authServices.signUp(req.body);
+
+    if (data) {
+      res
+        .status(200)
+        .json({ status: 200, message: "user successfully registered" });
+    } else {
+      res.status(409).json({ status: 409, message: "user already exists" });
+    }
+  } catch (error) {
+    res.status(500).send({
+      status: 500,
+      errorInfo: {
+        message: "error registering",
+        error: error.message,
+      },
+    });
+  }
+};

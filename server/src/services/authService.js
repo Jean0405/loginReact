@@ -12,3 +12,17 @@ export const login = async (info) => {
 };
 
 //REGISTER
+
+export const signUp = async (info) => {
+  let db = await connDB();
+  let collection = db.collection("users");
+
+  let user = await collection.find({ email: info.email }).toArray();
+
+  if (!user.length) {
+    await collection.insertOne(info);
+    return true;
+  } else {
+    return false;
+  }
+};
