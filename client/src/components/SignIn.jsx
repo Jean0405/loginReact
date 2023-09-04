@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const SignIn = ()=> {
+export const SignIn = () => {
   let redirect = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,24 +16,24 @@ export const SignIn = ()=> {
     event.preventDefault();
 
     config.method = "POST";
-    config.body = JSON.stringify({email, password});
-   
+    config.body = JSON.stringify({ email, password });
+
     try {
-        let result = await (
+      let result = await (
         await fetch("http://127.25.25.27:3300/auth/login", config)
       ).json();
 
 
       //IF USER NOT FOUND
-      if(result.status == 200){
-        redirect("/home", {state: {username: result.data[0].username}})
-      } else{
+      if (result.status == 200) {
+        redirect("/home", { state: { username: result.data[0].username } })
+      } else {
         alert("User not found");
       }
 
     } catch (error) {
       console.log(error);
-    }     
+    }
   };
 
   return (
