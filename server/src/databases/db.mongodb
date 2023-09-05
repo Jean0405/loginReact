@@ -1,100 +1,127 @@
 use("crud_react");
-db.createCollection("users");
+db.createCollection("users", {
+  validator: {
+    $jsonSchema: {
+      bsonType: "object",
+      required: ["username", "email", "password"],
+      properties: {
+        id: {
+          bsonType: "int",
+        },
+        username: {
+          bsonType: "string",
+          pattern: "^[a-zA-Z0-9 ]+$",
+          maxLength: 20,
+          description: "username is required",
+        },
+        email: {
+          bsonType: "string",
+          description: "email is required",
+        },
+        password: {
+          bsonType: "string",
+          maxLength: 20,
+          description: "password is required",
+        },
+      },
+    },
+  },
+});
 
+//post collection
 use("crud_react");
 db.createCollection("posts", {
-  validator:{
-    $jsonSchema:{
+  validator: {
+    $jsonSchema: {
       bsonType: "object",
       required: ["user", "title", "content"],
       properties: {
         id: {
-          bsonType: "int"
+          bsonType: "int",
         },
         user: {
           bsonType: "object",
-          required:["id","username","email"],
-          properties:{
-            id:{
-              bsonType:"int",
-              description:"user id is required"
+          required: ["id", "username", "email"],
+          properties: {
+            id: {
+              bsonType: "int",
+              description: "user id is required",
             },
             username: {
               bsonType: "string",
-              description: "username is required"
+              description: "username is required",
             },
             email: {
               bsonType: "string",
-              description: "email is required"
-            }
-          }
+              description: "email is required",
+            },
+          },
         },
-        title:{
+        title: {
           bsonType: "string",
-          description:"title is required"
+          description: "title is required",
         },
         content: {
           bsonType: "string",
           maxLength: 200,
-          description:"content is required"
+          description: "content is required",
         },
-        tag:{
-          bsonType:"array",
-          description: "at least one tag is required"
-        }
-      }
-    }
-  }
-})
+        tag: {
+          bsonType: "array",
+          description: "at least one tag is required",
+        },
+      },
+    },
+  },
+});
 
 use("crud_react");
 db.users.insertOne({
+  id: 1,
   username: "Sevedol",
   email: "jean@gmail.com",
   password: "jean123",
 });
 
 use("crud_react");
-db.posts.insertOne(
-  {
-    user: {
-      id: 1,
-      username: "Sevedol",
-      email: "jean@gmail.com"
-    },
-    title: "node js",
-    content: "node js es un entorno de desarrollo open source para javascript del lado del servidor el cual simula a un navegador mediante un servidor propio",
-    tag: ["programacion", "backend"],
-    date: new Date("2023-10-08")
-  }
-);
-
+db.posts.insertOne({
+  user: {
+    id: 1,
+    username: "Sevedol",
+    email: "jean@gmail.com",
+  },
+  title: "node js",
+  content:
+    "node js es un entorno de desarrollo open source para javascript del lado del servidor el cual simula a un navegador mediante un servidor propio",
+  tag: ["programacion", "backend"],
+  date: new Date("2023-10-08"),
+});
 
 use("crud_react");
 db.posts.aggregate([
   {
-    $unwind: "$tag"
+    $unwind: "$tag",
   },
   {
     $match: {
-      tag: "backend"
-    }
+      tag: "backend",
+    },
   },
   {
     $group: {
       _id: "$tag",
       count: {
-        $sum: 1
-      }
-    }
+        $sum: 1,
+      },
+    },
   },
   {
     $project: {
-      _id:0,
-      tag:"$_id",
-      count: 1
-    }
-  }
+      _id: 0,
+      tag: "$_id",
+      count: 1,
+    },
+  },
 ]);
 
 use("crud_react");
