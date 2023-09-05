@@ -34,7 +34,7 @@ db.createCollection("posts", {
   validator: {
     $jsonSchema: {
       bsonType: "object",
-      required: ["user", "title", "content"],
+      required: ["user", "title", "tag"],
       properties: {
         id: {
           bsonType: "int",
