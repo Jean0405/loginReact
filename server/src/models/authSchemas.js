@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 
 export const loginSchema = [
-  check("email").isEmail().notEmpty().withMessage("email is requiredDDD"),
+  check("email").isEmail().notEmpty().withMessage("email is required"),
   check("password").isString().notEmpty().withMessage("password is required"),
 ];
 
