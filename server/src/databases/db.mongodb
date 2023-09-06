@@ -1,3 +1,4 @@
+
 use("crud_react");
 db.createCollection("users", {
   validator: {
@@ -5,9 +6,6 @@ db.createCollection("users", {
       bsonType: "object",
       required: ["username", "email", "password"],
       properties: {
-        id: {
-          bsonType: "int",
-        },
         username: {
           bsonType: "string",
           pattern: "^[a-zA-Z0-9 ]+$",
@@ -36,16 +34,12 @@ db.createCollection("posts", {
       bsonType: "object",
       required: ["user", "title", "tag"],
       properties: {
-        id: {
-          bsonType: "int",
-        },
         user: {
           bsonType: "object",
-          required: ["id", "username", "email"],
+          required: ["userId","username", "email"],
           properties: {
-            id: {
-              bsonType: "int",
-              description: "user id is required",
+            userId:{
+              bsonType:"objectId"
             },
             username: {
               bsonType: "string",
@@ -70,6 +64,9 @@ db.createCollection("posts", {
           bsonType: "array",
           description: "at least one tag is required",
         },
+        date:{
+          bsonType:"date"
+        }
       },
     },
   },
@@ -77,7 +74,6 @@ db.createCollection("posts", {
 
 use("crud_react");
 db.users.insertOne({
-  id: 1,
   username: "Sevedol",
   email: "jean@gmail.com",
   password: "jean123",
@@ -86,43 +82,44 @@ db.users.insertOne({
 use("crud_react");
 db.posts.insertOne({
   user: {
-    id: 1,
+    userId: ObjectId("64f875808ced10b451a4aa01"),
     username: "Sevedol",
-    email: "jean@gmail.com",
+    email: "jean@gmail.com"
   },
-  title: "node js",
-  content:
-    "node js es un entorno de desarrollo open source para javascript del lado del servidor el cual simula a un navegador mediante un servidor propio",
+  title: "Node.js",
+  content: "Node.js es un entorno de desarrollo open source para JavaScript del lado del servidor que simula un navegador mediante un servidor propio.",
   tag: ["programacion", "backend"],
-  date: new Date("2023-10-08"),
+  date:new ISODate()
 });
 
 use("crud_react");
-db.posts.aggregate([
-  {
-    $unwind: "$tag",
-  },
-  {
-    $match: {
-      tag: "backend",
-    },
-  },
-  {
-    $group: {
-      _id: "$tag",
-      count: {
-        $sum: 1,
-      },
-    },
-  },
-  {
-    $project: {
-      _id: 0,
-      tag: "$_id",
-      count: 1,
-    },
-  },
-]);
+db.users.find();
+// use("crud_react");
+// db.posts.aggregate([
+//   {
+//     $unwind: "$tag",
+//   },
+//   {
+//     $match: {
+//       tag: "backend",
+//     },
+//   },
+//   {
+//     $group: {
+//       _id: "$tag",
+//       count: {
+//         $sum: 1,
+//       },
+//     },
+//   },
+//   {
+//     $project: {
+//       _id: 0,
+//       tag: "$_id",
+//       count: 1,
+//     },
+//   },
+// ]);
 
-use("crud_react");
-db.posts.find();
+// use("crud_react");
+// db.posts.find();

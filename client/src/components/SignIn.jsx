@@ -5,6 +5,8 @@ export const SignIn = () => {
   let redirect = useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //FETCH CONFIG METHODS
   const config = {
     headers: new Headers({
       "Content-Type": "application/json",

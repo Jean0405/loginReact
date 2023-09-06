@@ -1,10 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+  let redirect = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //FETCH CONFIG METHODS
+  const config = {
+    headers: new Headers({
+      "Content-Type": "application/json"
+    })
+  };
+
+  //API REQUEST
+  const Fetch = async (event) => {
+    event.preventDefault();
+
+    config.method = "POST";
+    config.body = JSON.stringify({ username, email, password });
+
+    try {
+      let result = await (
+        await fetch("http://127.25.25.27:3300/auth/signUp", config)
+      ).json();
+
+      if (result.status === 200) {
+        redirect("/home", { state: { user: result.user } })
+      } else {
+        alert("Ha ocurrido un error al registrarse");
+        console.log(result);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div>
       <form
@@ -12,18 +45,21 @@ export const SignUp = () => {
         className="h-screen flex flex-col justify-center items-center gap-y-4 bg-indigo-700">
         <h1 className="text-white font-bold pt-3">SIGN UP</h1>
         <input
+          type="text"
           value={username}
           onChange={(e) => { setUsername(e.target.value) }}
           className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"
           placeholder="Username"
         />
         <input
+          type="email"
           value={email}
           onChange={(e) => { setEmail(e.target.value) }}
           className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"
           placeholder="Email"
         />
         <input
+          type="password"
           value={password}
           onChange={(e) => { setPassword(e.target.value) }}
           className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"

@@ -21,7 +21,7 @@ export const signUp = async (info) => {
 
   if (!user.length) {
     await collection.insertOne(info);
-    return true;
+    return true
   } else {
     return false;
   }

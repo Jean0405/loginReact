@@ -6,7 +6,7 @@ export const SERVER = {
 };
 
 export const database = {
-  USER: process.env.USER || "jean0405",
-  PASSWORD: process.env.PASSWORD || "yewisaje",
-  DB: process.env.DB || "crud_react",
+  USER: "jean0405",
+  PASSWORD: "yewisaje",
+  DB: "crud_react",
 };

@@ -27,11 +27,13 @@ export const login = async (req, res) => {
 export const signUp = async (req, res) => {
   try {
     let data = await authServices.signUp(req.body);
-
     if (data) {
       res
         .status(200)
-        .json({ status: 200, message: "user successfully registered" });
+        .json({ status: 200, message: "user successfully registered", user: {
+          username: req.body.username,
+          email: req.body.email
+        } });
     } else {
       res.status(409).json({ status: 409, message: "user already exists" });
     }
