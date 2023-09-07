@@ -11,7 +11,7 @@ export const login = async (req, res) => {
         data: req.body.email,
       });
     } else {
-      res.status(200).json({ status: 200, message: "user found ", data: data });
+      res.status(200).json({ status: 200, message: "user found", data: data[0] });
     }
   } catch (error) {
     res.status(500).send({
@@ -27,13 +27,13 @@ export const login = async (req, res) => {
 export const signUp = async (req, res) => {
   try {
     let data = await authServices.signUp(req.body);
+
     if (data) {
       res
         .status(200)
-        .json({ status: 200, message: "user successfully registered", user: {
-          username: req.body.username,
-          email: req.body.email
-        } });
+        .json({ status: 200, message: "user successfully registered", data: {
+          username: req.body.username, 
+          email: req.body.email}});
     } else {
       res.status(409).json({ status: 409, message: "user already exists" });
     }

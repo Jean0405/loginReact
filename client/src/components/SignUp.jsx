@@ -27,7 +27,14 @@ export const SignUp = () => {
       ).json();
 
       if (result.status === 200) {
-        redirect("/home", { state: { user: result.user } })
+        redirect("/home", {
+          state: {
+            user: {
+              username: result.data.username,
+              email: result.data.email
+            }
+          }
+        })
       } else {
         alert("Ha ocurrido un error al registrarse");
         console.log(result);

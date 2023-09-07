@@ -28,7 +28,14 @@ export const SignIn = () => {
 
       //IF USER NOT FOUND
       if (result.status == 200) {
-        redirect("/home", { state: { username: result.data[0].username } })
+        redirect("/home", {
+          state: {
+            user: {
+              username: result.data.username,
+              email: result.data.email
+            }
+          }
+        })
       } else {
         alert("User not found");
       }
