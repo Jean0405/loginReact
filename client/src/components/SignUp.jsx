@@ -55,21 +55,21 @@ export const SignUp = () => {
           type="text"
           value={username}
           onChange={(e) => { setUsername(e.target.value) }}
-          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"
+          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2 text-indigo-700"
           placeholder="Username"
         />
         <input
           type="email"
           value={email}
           onChange={(e) => { setEmail(e.target.value) }}
-          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"
+          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2 text-indigo-700"
           placeholder="Email"
         />
         <input
           type="password"
           value={password}
           onChange={(e) => { setPassword(e.target.value) }}
-          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2"
+          className="md:w-1/2 lg:w-1/3 bg-gray-100 border-black outline-none border-l-4 p-2 text-indigo-700"
           placeholder="Password"
         />
         <div className="grid place-items-center ">

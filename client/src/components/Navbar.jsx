@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 export const Navbar = (props) => {
   return (
-    <div className="navbar navbar-sticky">
+    <div className="navbar navbar-sticky bg-zinc-800">
       <div className="navbar-start">
         <a href="" className="navbar-item text-indigo-600 font-bold">BLOGS</a>
       </div>

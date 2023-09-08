@@ -59,7 +59,7 @@ export const SignIn = () => {
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2"
+          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2 text-indigo-700"
         />
         <input
           name="password"
@@ -67,7 +67,7 @@ export const SignIn = () => {
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2"
+          className="sm:w-1/2 md:w-1/2 lg:w-1/4 h-10 bg-gray-100 outline-none border-indigo-700 border-l-4 p-2 text-indigo-700"
         />
         <div className="grid place-items-center ">
           <input
