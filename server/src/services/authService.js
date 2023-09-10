@@ -8,7 +8,15 @@ export const login = async (info) => {
     .find({ email: info.email, password: info.password })
     .toArray();
 
-  return resultado;
+  if (!resultado.length) return [];
+
+  return [
+    {
+      _id: resultado[0]._id,
+      username: resultado[0].username,
+      email: resultado[0].email,
+    },
+  ];
 };
 
 //REGISTER
@@ -21,7 +29,7 @@ export const signUp = async (info) => {
 
   if (!user.length) {
     await collection.insertOne(info);
-    return true
+    return true;
   } else {
     return false;
   }
