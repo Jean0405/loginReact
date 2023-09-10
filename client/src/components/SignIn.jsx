@@ -25,9 +25,9 @@ export const SignIn = () => {
         await fetch("http://127.25.25.27:3300/auth/login", config)
       ).json();
 
-
       //IF USER NOT FOUND
       if (result.status == 200) {
+        localStorage.setItem("token", result.token);
         redirect("/home", {
           state: {
             user: {
