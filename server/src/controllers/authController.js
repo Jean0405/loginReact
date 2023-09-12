@@ -32,17 +32,18 @@ export const login = async (req, res) => {
 };
 
 export const signUp = async (req, res) => {
+  const { username, email, password } = req.body;
   try {
-    let data = await authServices.signUp(req.body);
+    let user = await authServices.signUp(req.body);
 
-    if (data) {
+    if (user) {
+      let data = await authServices.login({ email, password });
+      let jwt = await generateToken(data);
       res.status(200).json({
         status: 200,
         message: "user successfully registered",
-        data: {
-          username: req.body.username,
-          email: req.body.email,
-        },
+        data: data[0],
+        token: jwt,
       });
     } else {
       res.status(409).json({ status: 409, message: "user already exists" });

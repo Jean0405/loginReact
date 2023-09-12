@@ -27,6 +27,7 @@ export const SignUp = () => {
       ).json();
 
       if (result.status === 200) {
+        localStorage.setItem("token", result.token);
         redirect("/home", {
           state: {
             user: {
@@ -37,7 +38,6 @@ export const SignUp = () => {
         })
       } else {
         alert("Ha ocurrido un error al registrarse");
-        console.log(result);
       }
 
     } catch (error) {
