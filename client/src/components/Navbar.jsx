@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom"
 export const Navbar = (props) => {
 
-  const handleLogout = ()=>{
+  const handleLogout = () => {
     localStorage.removeItem("token")
   }
 
   return (
-    <div className="navbar navbar-sticky bg-zinc-800">
+    <div className="navbar bg-zinc-800">
       <div className="navbar-start">
         <a href="" className="navbar-item text-indigo-600 font-bold">BLOGS</a>
       </div>
