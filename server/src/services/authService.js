@@ -28,7 +28,7 @@ export const signUp = async (info) => {
   let user = await collection.find({ email: info.email }).toArray();
 
   if (!user.length) {
-    await collection.insertOne(info);
+    await collection.insertOne(info);cl
     return true;
   } else {
     return false;
