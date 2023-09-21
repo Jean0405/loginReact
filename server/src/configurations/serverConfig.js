@@ -1,8 +1,8 @@
 import "dotenv/config";
 
 export const SERVER = {
-  PORT: process.env.PORT || 3300,
-  HOST: process.env.HOST || "127.25.25.27",
+  PORT: process.env.PORT || 5176,
+  HOST: process.env.HOST || "192.168.129.72",
 };
 
 export const database = {
